@@ -7,21 +7,28 @@ import java.util.Collections;
 import java.util.List;
 
 public class CaesarCipher {
+    private final AlphabetEnglish alphabetEnglish = new AlphabetEnglish();
 
     public String caesarEncrypt(String input, int shift) {
-        AlphabetEnglish alphabet = new AlphabetEnglish();
-        List<Character> alphabetList = alphabet.getAlphabet();
-        List<Character> copy = new ArrayList<>(alphabetList);
         if (shift > 0) {
             shift = -shift;
         }
-        Collections.rotate(copy, shift);
+        return applyShift(input, shift);
+    }
+
+    public String caesarDecrypt(String input, int shift) {
+        return applyShift(input, shift);
+    }
+
+    public String applyShift(String input, int shift) {
+        List<Character> shifted = new ArrayList<>(alphabetEnglish.getAlphabet());
+        Collections.rotate(shifted, shift);
+
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < input.length(); i++) {
-            char ch = input.charAt(i);
-            if (copy.contains(ch)) {
-                char c = copy.get(alphabetList.indexOf(ch));
-                sb.append(c);
+        for (char ch : input.toCharArray()) {
+            if (alphabetEnglish.getAlphabet().contains(ch)) {
+                int index = alphabetEnglish.getAlphabet().indexOf(ch);
+                sb.append(shifted.get(index));
             } else {
                 sb.append(ch);
             }

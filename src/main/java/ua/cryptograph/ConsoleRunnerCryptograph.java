@@ -13,5 +13,8 @@ public class ConsoleRunnerCryptograph {
         String encText = caesarCipher.caesarEncrypt(text, 5);
         System.out.println("Encrypt : " + encText);
 
+        String decText = caesarCipher.caesarDecrypt(encText, 5);
+        System.out.println("Decrypt : " + decText);
+
     }
 }
