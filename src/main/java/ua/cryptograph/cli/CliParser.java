@@ -1,0 +1,48 @@
+package ua.cryptograph.cli;
+
+public class CliParser {
+
+    public CliCommand parse(String[] args) {
+        if (args.length < 2) throw usage();
+
+        Mode mode = Mode.from(args[0]);
+        String filePath = args[1];
+
+        switch (mode) {
+            case ENCRYPT, DECRYPT: return parseWithShift(mode, filePath, args);
+            case BRUTE_FORCE: return parseBruteforce(mode, filePath, args);
+        }
+        return null;
+    }
+
+    private CliCommand parseWithShift(Mode mode, String filePath, String[] args) {
+        if (args.length != 3) throw new IllegalArgumentException(mode + " requires <file> <shift>");
+        return new CliCommand(mode, filePath, parseShift(args[2]));
+    }
+
+    private CliCommand parseBruteforce(
+            Mode mode,
+            String filePath,
+            String[] args
+    ) {
+        if (args.length != 2) throw new IllegalArgumentException("Bruteforce requires <file>");
+        return new CliCommand(mode, filePath, null);
+    }
+
+    private int parseShift(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Shift must be a number");
+        }
+    }
+
+    private IllegalArgumentException usage() {
+        return new IllegalArgumentException("""
+                Usage:
+                  enc <file> <shift>
+                  dec <file> <shift>
+                  bf  <file>
+                """);
+    }
+}
