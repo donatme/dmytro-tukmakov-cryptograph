@@ -10,7 +10,9 @@ public class FileWriter {
         try {
             Path output = Path.of(path);
             Path parent = output.getParent();
-            if (parent != null) Files.createDirectories(parent);
+            if (parent != null) {
+                Files.createDirectories(parent);
+            }
             Files.writeString(output, content);
         } catch (IOException e) {
             throw new RuntimeException("Failed to write file: " + path, e);

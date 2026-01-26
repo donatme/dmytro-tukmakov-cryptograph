@@ -7,10 +7,10 @@ public class UniversalShifter {
         if (input == null || input.isEmpty()) return input;
         StringBuilder sb = new StringBuilder();
         for (char ch : input.toCharArray()) {
-            if (Alphabet.isInAlphabet(ch, Alphabet.alphabet_en)) {
-                sb.append(shiftChar(ch, shift, Alphabet.alphabet_en));
-            } else if (Alphabet.isInAlphabet(ch, Alphabet.alphabet_cyrillic)) {
-                sb.append(shiftChar(ch, shift, Alphabet.alphabet_cyrillic));
+            if (Alphabet.isInAlphabet(ch, Alphabet.ALPHABET_EN)) {
+                sb.append(shiftChar(ch, shift, Alphabet.ALPHABET_EN));
+            } else if (Alphabet.isInAlphabet(ch, Alphabet.ALPHABET_CYRILLIC)) {
+                sb.append(shiftChar(ch, shift, Alphabet.ALPHABET_CYRILLIC));
             } else {
                 sb.append(ch);
             }

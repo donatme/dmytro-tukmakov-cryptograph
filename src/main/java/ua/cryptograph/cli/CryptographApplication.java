@@ -21,13 +21,14 @@ public class CryptographApplication {
             System.out.println("ERROR: input file does not exist: " + inputPath);
             return;
         }
+
         String inputText = fileReader.read(inputPath.toString());
-        String result =null;
-        switch (cmd.mode()) {
-            case ENCRYPT : result =cipher.caesarEncrypt(inputText, cmd.shift()); break;
-            case DECRYPT : result =cipher.caesarDecrypt(inputText, cmd.shift());break;
-            case BRUTE_FORCE : result =bruteForce.crack(inputText);break;
-        }
+        String result = switch (cmd.mode()) {
+            case ENCRYPT -> cipher.caesarEncrypt(inputText, cmd.shift());
+            case DECRYPT -> cipher.caesarDecrypt(inputText, cmd.shift());
+            case BRUTE_FORCE -> bruteForce.crack(inputText);
+        };
+
         String outputPath = buildOutputPath(cmd.filePath(), cmd.mode());
         fileWriter.write(outputPath, result);
         System.out.println("Result saved to: " + outputPath);
@@ -35,11 +36,12 @@ public class CryptographApplication {
 
     private String buildOutputPath(String inputPath, Mode mode) {
         int dotIndex = inputPath.lastIndexOf('.');
-        if (dotIndex == -1) dotIndex = inputPath.length();
-        String name = inputPath.substring(0, dotIndex); //обрезака до точки
+        if (dotIndex == -1) {
+            dotIndex = inputPath.length();
+        }
+        String name = inputPath.substring(0, dotIndex);
         String ext = dotIndex < inputPath.length() ? inputPath.substring(dotIndex) : "";
         name = name.replaceAll("\\[(ENCRYPT|DECRYPT|BRUTFORCE)\\]$", "");
         return name + "[" + mode + "]" + ext;
     }
 }
-

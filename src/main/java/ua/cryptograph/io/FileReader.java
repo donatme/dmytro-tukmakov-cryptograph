@@ -7,7 +7,9 @@ import java.nio.file.Path;
 public class FileReader {
 
     public String read(String filePath) {
-        if (filePath == null || filePath.isBlank()) throw new IllegalArgumentException("File path must not be empty");
+        if (filePath == null || filePath.isBlank()) {
+            throw new IllegalArgumentException("File path must not be empty");
+        }
         try {
             return Files.readString(Path.of(filePath));
         } catch (IOException e) {

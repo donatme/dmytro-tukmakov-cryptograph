@@ -3,20 +3,26 @@ package ua.cryptograph.cli;
 public class CliParser {
 
     public CliCommand parse(String[] args) {
-        if (args.length < 2) throw usage();
+        if (args.length < 2) {
+            throw usageError();
+        }
 
         Mode mode = Mode.from(args[0]);
         String filePath = args[1];
 
         switch (mode) {
-            case ENCRYPT, DECRYPT: return parseWithShift(mode, filePath, args);
-            case BRUTE_FORCE: return parseBruteforce(mode, filePath, args);
+            case ENCRYPT, DECRYPT:
+                return parseWithShift(mode, filePath, args);
+            case BRUTE_FORCE:
+                return parseBruteforce(mode, filePath, args);
         }
-        return null;
+        throw usageError();
     }
 
     private CliCommand parseWithShift(Mode mode, String filePath, String[] args) {
-        if (args.length != 3) throw new IllegalArgumentException(mode + " requires <file> <shift>");
+        if (args.length != 3) {
+            throw new IllegalArgumentException(mode + " requires <file> <shift>");
+        }
         return new CliCommand(mode, filePath, parseShift(args[2]));
     }
 
@@ -25,7 +31,9 @@ public class CliParser {
             String filePath,
             String[] args
     ) {
-        if (args.length != 2) throw new IllegalArgumentException("Bruteforce requires <file>");
+        if (args.length != 2) {
+            throw new IllegalArgumentException("Bruteforce requires <file>");
+        }
         return new CliCommand(mode, filePath, null);
     }
 
@@ -37,7 +45,7 @@ public class CliParser {
         }
     }
 
-    private IllegalArgumentException usage() {
+    private IllegalArgumentException usageError() {
         return new IllegalArgumentException("""
                 Usage:
                   enc <file> <shift>

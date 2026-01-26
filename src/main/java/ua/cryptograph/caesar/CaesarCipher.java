@@ -18,15 +18,18 @@ public class CaesarCipher {
     }
 
     private int detectAlphabetLength(String input) {
-        if (input == null || input.isEmpty()) return Alphabet.alphabet_en.length;
+        if (input == null || input.isBlank()) {
+            return Alphabet.ALPHABET_EN.length;
+        }
 
         for (char c : input.toCharArray()) {
-            if (Alphabet.isInAlphabet(c, Alphabet.alphabet_cyrillic))
-                return Alphabet.alphabet_cyrillic.length;
-            else if (Alphabet.isInAlphabet(c, Alphabet.alphabet_en))
-                return Alphabet.alphabet_en.length;
+            if (Alphabet.isInAlphabet(c, Alphabet.ALPHABET_CYRILLIC)) {
+                return Alphabet.ALPHABET_CYRILLIC.length;
+            } else if (Alphabet.isInAlphabet(c, Alphabet.ALPHABET_EN)) {
+                return Alphabet.ALPHABET_EN.length;
+            }
         }
-        return Alphabet.alphabet_cyrillic.length;
+        return Alphabet.ALPHABET_CYRILLIC.length;
     }
 
     private int normalizeShift(int shift, int alphabetLength) {
