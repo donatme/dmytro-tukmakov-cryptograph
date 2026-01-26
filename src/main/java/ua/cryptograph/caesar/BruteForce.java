@@ -27,7 +27,7 @@ public class BruteForce {
     private int score(String text) {
         int score = 0;
 
-        score += count(text, ' ') * 2;
+        score += count(text) * 2;
 
         if (text.contains(" the ")) score += 50;
         if (text.contains(" и ")) score += 50;
@@ -36,10 +36,10 @@ public class BruteForce {
         return score;
     }
 
-    private int count(String text, char ch) {
+    private int count(String text) {
         int c = 0;
         for (char t : text.toCharArray()) {
-            if (t == ch) c++;
+            if (t == ' ') c++;
         }
         return c;
     }

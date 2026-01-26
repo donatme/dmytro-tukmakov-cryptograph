@@ -13,9 +13,9 @@ public class CliParser {
         String filePath = args[1];
 
         switch (mode) {
-            case ENCRYPT, DECRYPT:
+            case ENCRYPTED, DECRYPTED:
                 return parseWithShift(mode, filePath, args);
-            case BRUTE_FORCE:
+            case BRUTEFORCE:
                 return parseBruteforce(mode, filePath, args);
         }
         throw usageError();

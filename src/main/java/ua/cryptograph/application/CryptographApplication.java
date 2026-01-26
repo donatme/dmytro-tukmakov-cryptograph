@@ -8,6 +8,7 @@ import ua.cryptograph.io.FileWriter;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 public class CryptographApplication {
 
     private final FileReader fileReader;
@@ -38,9 +39,9 @@ public class CryptographApplication {
         String inputText = fileReader.read(inputPath.toString());
 
         String result = switch (cmd.mode()) {
-            case ENCRYPT -> cipher.caesarEncrypt(inputText, cmd.shift());
-            case DECRYPT -> cipher.caesarDecrypt(inputText, cmd.shift());
-            case BRUTE_FORCE -> bruteForce.crack(inputText);
+            case ENCRYPTED -> cipher.caesarEncrypt(inputText, cmd.shift());
+            case DECRYPTED -> cipher.caesarDecrypt(inputText, cmd.shift());
+            case BRUTEFORCE -> bruteForce.crack(inputText);
         };
 
         String outputPath = buildOutputPath(cmd.filePath(), cmd.mode());
@@ -56,7 +57,7 @@ public class CryptographApplication {
         String name = inputPath.substring(0, dotIndex);
         String ext = dotIndex < inputPath.length() ? inputPath.substring(dotIndex) : "";
 
-        name = name.replaceAll("\\[(ENCRYPT|DECRYPT|BRUTFORCE)\\]$", "");
+        name = name.replaceAll("\\[(ENCRYPTED|DECRYPTED|BRUTEFORCE)\\]$", "");
         return name + "[" + mode + "]" + ext;
     }
 }
