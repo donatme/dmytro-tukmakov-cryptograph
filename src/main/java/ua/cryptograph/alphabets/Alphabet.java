@@ -1,13 +1,33 @@
 package ua.cryptograph.alphabets;
 
-public class Alphabet {
-    public static final char[] ALPHABET_EN = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
-    public static final char[] ALPHABET_CYRILLIC = "АБВГҐДЕЄЖЗИЙІЇКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгґдеєжзиійїклмнопрстуфхцчшщъыьэюя".toCharArray();
+public final class Alphabet {
 
-    public static boolean isInAlphabet(char ch, char[] alphabet) {
-        for (char a : alphabet) {
-            if (a == ch) return true;
+    private final String name;
+    private final char[] symbols;
+
+    public Alphabet(String name, String symbols) {
+        this.name = name;
+        this.symbols = symbols.toCharArray();
+    }
+
+    public boolean contains(char ch) {
+        for (char c : symbols) {
+            if (c == ch) return true;
         }
         return false;
+    }
+
+    public char shift(char ch, int shift) {
+        for (int i = 0; i < symbols.length; i++) {
+            if (symbols[i] == ch) {
+                int newIndex = (i + shift + symbols.length) % symbols.length;
+                return symbols[newIndex];
+            }
+        }
+        return ch;
+    }
+
+    public int length() {
+        return symbols.length;
     }
 }

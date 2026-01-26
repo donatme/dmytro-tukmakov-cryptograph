@@ -1,6 +1,7 @@
 package ua.cryptograph.caesar;
 
 import ua.cryptograph.alphabets.Alphabet;
+import ua.cryptograph.alphabets.Alphabets;
 
 public class CaesarCipher {
     private final UniversalShifter universalShifter = new UniversalShifter();
@@ -18,18 +19,13 @@ public class CaesarCipher {
     }
 
     private int detectAlphabetLength(String input) {
-        if (input == null || input.isBlank()) {
-            return Alphabet.ALPHABET_EN.length;
-        }
-
-        for (char c : input.toCharArray()) {
-            if (Alphabet.isInAlphabet(c, Alphabet.ALPHABET_CYRILLIC)) {
-                return Alphabet.ALPHABET_CYRILLIC.length;
-            } else if (Alphabet.isInAlphabet(c, Alphabet.ALPHABET_EN)) {
-                return Alphabet.ALPHABET_EN.length;
+        for (char ch : input.toCharArray()) {
+            Alphabet alphabet = Alphabets.detect(ch);
+            if (alphabet != null) {
+                return alphabet.length();
             }
         }
-        return Alphabet.ALPHABET_CYRILLIC.length;
+        return Alphabets.EN.length();
     }
 
     private int normalizeShift(int shift, int alphabetLength) {
