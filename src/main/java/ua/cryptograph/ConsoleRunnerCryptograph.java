@@ -1,14 +1,15 @@
 package ua.cryptograph;
 
+import ua.cryptograph.application.ApplicationFactory;
 import ua.cryptograph.cli.CliCommand;
 import ua.cryptograph.cli.CliParser;
-import ua.cryptograph.cli.CryptographApplication;
+import ua.cryptograph.application.CryptographApplication;
 
 public class ConsoleRunnerCryptograph {
-    public static void main(String[] args) {
+    static void main(String[] args) {
 
-        CliCommand command = new CliParser().parse(args);
-        new CryptographApplication().run(command);
-
+        CryptographApplication app = ApplicationFactory.create();
+        CliCommand cmd = new CliParser().parse(args);
+        app.run(cmd);
     }
 }

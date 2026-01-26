@@ -1,4 +1,4 @@
-package ua.cryptograph.cli;
+package ua.cryptograph.application;
 
 public enum Mode {
     ENCRYPT,

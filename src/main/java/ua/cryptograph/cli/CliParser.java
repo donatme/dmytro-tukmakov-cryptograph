@@ -1,5 +1,7 @@
 package ua.cryptograph.cli;
 
+import ua.cryptograph.application.Mode;
+
 public class CliParser {
 
     public CliCommand parse(String[] args) {

@@ -1,5 +1,7 @@
 package ua.cryptograph.cli;
 
+import ua.cryptograph.application.Mode;
+
 public final class CliCommand {
 
     private final Mode mode;
