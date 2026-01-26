@@ -11,7 +11,7 @@ public class ApplicationFactory {
         FileReader fileReader = new FileReader();
         FileWriter fileWriter = new FileWriter();
         CaesarCipher cipher = new CaesarCipher();
-        BruteForce bruteForce = new BruteForce();
+        BruteForce bruteForce = new BruteForce(cipher);
 
         return new CryptographApplication(fileReader, fileWriter, cipher, bruteForce);
     }
