@@ -1,5 +1,7 @@
 package ua.cryptograph.caesar;
 
+import ua.cryptograph.alphabets.Alphabets;
+
 public class BruteForce {
     private final CaesarCipher cipher;
 
@@ -15,7 +17,7 @@ public class BruteForce {
     }
 
     public String crack(String encryptedText) {
-        int maxShift = 40;
+        int maxShift = Alphabets.maxLength();
         String bestText = encryptedText;
         int bestScore = Integer.MIN_VALUE;
 
@@ -23,13 +25,13 @@ public class BruteForce {
             String candidate = cipher.caesarDecrypt(encryptedText, shift);
             int score = score(candidate);
 
-            if (score > bestScore) {
+            if (score > bestScore || (score == bestScore && shift < bestShift)) {
                 bestScore = score;
                 bestText = candidate;
                 bestShift = shift;
             }
         }
-        return  bestText;
+        return bestText;
     }
 
     private int score(String text) {
@@ -38,10 +40,11 @@ public class BruteForce {
         score += count(text, ' ') * 3;
 
         if (text.length() < 20) return 0;
+
         if (text.contains(" the ")) score += 200;
         if (text.contains(" and ")) score += 150;
 
-        if (text.contains(" що ")) score += 100;
+        if (text.contains(" що ")) score += 120;
         if (text.contains(" не ")) score += 80;
         if (text.contains(" і ")) score += 50;
 

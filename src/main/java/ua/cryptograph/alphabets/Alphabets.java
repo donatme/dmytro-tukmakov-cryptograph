@@ -10,7 +10,10 @@ public final class Alphabets {
     public static final Alphabet CYRILLIC = new Alphabet(
             "CYRILLIC", "АБВГҐДЕЄЖЗИЙІЇКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгґдеєжзиійїклмнопрстуфхцчшщъыьэюя");
 
-    private static final List<Alphabet> ALL = List.of(EN, CYRILLIC);
+    public static final Alphabet SYMBOLS = new Alphabet(
+            "SYMBOLS", ".,«»\"':!? 1234567890");
+
+    private static final List<Alphabet> ALL = List.of(EN, CYRILLIC, SYMBOLS);
 
     private Alphabets() {
     }
@@ -22,5 +25,15 @@ public final class Alphabets {
             }
         }
         return null;
+    }
+
+    public static int maxLength() {
+        int max = 0;
+        for (Alphabet alphabet : ALL) {
+            if (alphabet.length() > max) {
+                max = alphabet.length();
+            }
+        }
+        return max;
     }
 }
