@@ -2,26 +2,12 @@
 Each of them plays a specific role, and together they form a reliable system.
 Without proper balance, even expensive parts may not deliver good performance.
 
-        # What does the CPU actually do?
-The central processing unit (CPU) is responsible for executing instructions and calculations.
-Typical clock speeds range from 3.0GHz to 4.8GHz, depending on the model and workload.
-A faster CPU can handle complex tasks more efficiently, but it also requires good cooling.
+        # У список включено значимі мозаїки Вінниці, згадані в дослідженнях
+Центру історії Вінниці, публікаціях ЗМІ, офіційних повідомленнях та інших
+надійних джерелах. Перелік містить інформацію про назву, авторів, дату створення,
+місце розташування й тематику робіт.
 
-        # Memory is another critical element. Random access memory (RAM), such as 8GB or 16GB DDR4,
-allows applications to run smoothly. Without enough RAM, the system may feel slow,
-even when using a powerful processor.
-
-        # Why does storage matter?
-Solid-state drives (SSD) with capacities like 512GB or 1TB significantly reduce loading times.
-Compared to traditional hard drives, SSDs are quieter, faster, and more reliable.
-
-        # Graphics performance should not be ignored. A graphics card (GPU) with 6GB or 12GB of VRAM
-is essential for gaming, video editing, and 3D rendering. For basic office tasks,
-however, integrated graphics may be sufficient.
-
-        # Finally, all components rely on a stable power supply. A PSU rated at 550W–750W ensures
-safe operation and protects the system from voltage issues. Everything is installed on
-a motherboard and enclosed in a case costing around $90–$150, where airflow and cable
-management matter more than appearance.
-
-Добавили еще языка good game
+        # 1571 — Аббас I, шах Персії з династії Сефевідів, творець централізованої держави
+          Посмертний портрет Вольфганга Амадея Моцарта, написаний Барбарою Крафт у 1819 році
+          1756 — Вольфганг Амадей Моцарт, австрійський композитор
+          1790 — Петро Гулак-Артемовський, український поет, байкар.

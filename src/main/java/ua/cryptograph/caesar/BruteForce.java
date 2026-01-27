@@ -3,13 +3,20 @@ package ua.cryptograph.caesar;
 public class BruteForce {
     private final CaesarCipher cipher;
 
+    public int getBestShift() {
+        return bestShift;
+    }
+
+    private int bestShift = 0;
+
+
     public BruteForce(CaesarCipher cipher) {
         this.cipher = cipher;
     }
 
     public String crack(String encryptedText) {
         int maxShift = 40;
-        String best = encryptedText;
+        String bestText = encryptedText;
         int bestScore = Integer.MIN_VALUE;
 
         for (int shift = 0; shift < maxShift; shift++) {
@@ -18,28 +25,37 @@ public class BruteForce {
 
             if (score > bestScore) {
                 bestScore = score;
-                best = candidate;
+                bestText = candidate;
+                bestShift = shift;
             }
         }
-        return best;
+        return  bestText;
     }
 
     private int score(String text) {
         int score = 0;
 
-        score += count(text) * 2;
+        score += count(text, ' ') * 3;
 
-        if (text.contains(" the ")) score += 50;
-        if (text.contains(" и ")) score += 50;
-        if (text.contains(" що ")) score += 50;
+        if (text.length() < 20) return 0;
+        if (text.contains(" the ")) score += 200;
+        if (text.contains(" and ")) score += 150;
+
+        if (text.contains(" що ")) score += 100;
+        if (text.contains(" не ")) score += 80;
+        if (text.contains(" і ")) score += 50;
+
+        score -= count(text, '@') * 6;
+        score -= count(text, '#') * 6;
+        score -= count(text, '$') * 6;
 
         return score;
     }
 
-    private int count(String text) {
+    private int count(String text, char ch) {
         int c = 0;
         for (char t : text.toCharArray()) {
-            if (t == ' ') c++;
+            if (t == ch) c++;
         }
         return c;
     }

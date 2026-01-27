@@ -12,13 +12,10 @@ public class CliParser {
         Mode mode = Mode.from(args[0]);
         String filePath = args[1];
 
-        switch (mode) {
-            case ENCRYPTED, DECRYPTED:
-                return parseWithShift(mode, filePath, args);
-            case BRUTEFORCE:
-                return parseBruteforce(mode, filePath, args);
-        }
-        throw usageError();
+        return switch (mode) {
+            case ENCRYPTED, DECRYPTED -> parseWithShift(mode, filePath, args);
+            case BRUTEFORCE -> parseBruteforce(mode, filePath, args);
+        };
     }
 
     private CliCommand parseWithShift(Mode mode, String filePath, String[] args) {
@@ -28,13 +25,9 @@ public class CliParser {
         return new CliCommand(mode, filePath, parseShift(args[2]));
     }
 
-    private CliCommand parseBruteforce(
-            Mode mode,
-            String filePath,
-            String[] args
-    ) {
+    private CliCommand parseBruteforce(Mode mode, String filePath, String[] args) {
         if (args.length != 2) {
-            throw new IllegalArgumentException("Bruteforce requires <file>");
+            throw new IllegalArgumentException("Bruteforce should has only 2 args: <bf> <file>");
         }
         return new CliCommand(mode, filePath, null);
     }

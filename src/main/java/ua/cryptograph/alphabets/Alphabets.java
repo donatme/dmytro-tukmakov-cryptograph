@@ -5,14 +5,10 @@ import java.util.List;
 public final class Alphabets {
 
     public static final Alphabet EN = new Alphabet(
-            "EN",
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    );
+            "EN", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
 
     public static final Alphabet CYRILLIC = new Alphabet(
-            "CYRILLIC",
-            "АБВГҐДЕЄЖЗИЙІЇКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгґдеєжзиійїклмнопрстуфхцчшщъыьэюя"
-    );
+            "CYRILLIC", "АБВГҐДЕЄЖЗИЙІЇКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгґдеєжзиійїклмнопрстуфхцчшщъыьэюя");
 
     private static final List<Alphabet> ALL = List.of(EN, CYRILLIC);
 
