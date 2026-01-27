@@ -16,7 +16,7 @@ public class CryptographApplication {
     private final FileWriter fileWriter;
     private final CaesarCipher cipher;
     private final BruteForce bruteForce;
-    private final static String regex = "\\[(ENCRYPTED|DECRYPTED|BRUTEFORCE)(\\[KEY=\\d+])?]";
+    private final String regex = "\\[(ENCRYPTED|DECRYPTED|BRUTEFORCE)(\\[KEY=\\d+])?]";
 
     public CryptographApplication(FileReader fileReader, FileWriter fileWriter, CaesarCipher cipher, BruteForce bruteForce) {
         this.fileReader = fileReader;
