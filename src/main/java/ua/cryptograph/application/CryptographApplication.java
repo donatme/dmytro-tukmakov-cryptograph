@@ -16,7 +16,7 @@ public class CryptographApplication {
     private final FileWriter fileWriter;
     private final CaesarCipher cipher;
     private final BruteForce bruteForce;
-    private final String regex = "\\[(ENCRYPTED|DECRYPTED|BRUTEFORCE)(\\[KEY=\\d+])?]";
+    private final static String OUTPUT_FILE_REGEX = "\\[(ENCRYPTED|DECRYPTED|BRUTEFORCE)(\\[KEY=\\d+])?]";
 
     public CryptographApplication(FileReader fileReader, FileWriter fileWriter, CaesarCipher cipher, BruteForce bruteForce) {
         this.fileReader = fileReader;
@@ -28,18 +28,22 @@ public class CryptographApplication {
     private void deleteOldBruteForceFiles(Path inputPath) {
         Path dir = inputPath.getParent();
 
-        if (dir == null) return;
+        if (dir == null) {
+            return;
+        }
 
         String fileName = inputPath.getFileName().toString();
         int dotIndex = fileName.lastIndexOf('.');
         String baseName = dotIndex == -1 ? fileName : fileName.substring(0, dotIndex);
         String ext = dotIndex == -1 ? "" : fileName.substring(dotIndex);
-        baseName = baseName.replaceAll(regex, "");
+        baseName = baseName.replaceAll(OUTPUT_FILE_REGEX, "");
 
         try {
             File dirFile = dir.toFile();
             File[] files = dirFile.listFiles();
-            if (files == null) return;
+            if (files == null) {
+                return;
+            }
             for (File file : files) {
                 fileName = file.getName();
                 boolean isBruteforceFile =
@@ -84,11 +88,10 @@ public class CryptographApplication {
 
         String name = inputPath.substring(0, dotIndex);
         String ext = dotIndex < inputPath.length() ? inputPath.substring(dotIndex) : "";
-        name = name.replaceAll(regex, "");
+        name = name.replaceAll(OUTPUT_FILE_REGEX, "");
 
-        if (mode == Mode.BRUTEFORCE) {
-            return name + "[" + mode + "][KEY=" + bruteForce.getBestShift() + "]" + ext;
-        }
-        return name + "[" + mode + "]" + ext;
+        return (mode == Mode.BRUTEFORCE) ?
+                (name + "[" + mode + "][KEY=" + bruteForce.getBestShift() + "]" + ext) :
+                name + "[" + mode + "]" + ext;
     }
 }

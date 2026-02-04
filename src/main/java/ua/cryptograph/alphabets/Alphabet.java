@@ -12,7 +12,9 @@ public final class Alphabet {
 
     public boolean contains(char ch) {
         for (char c : symbols) {
-            if (c == ch) return true;
+            if (c == ch) {
+                return true;
+            }
         }
         return false;
     }

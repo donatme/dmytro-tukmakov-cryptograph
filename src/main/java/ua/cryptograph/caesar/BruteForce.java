@@ -4,13 +4,11 @@ import ua.cryptograph.alphabets.Alphabets;
 
 public class BruteForce {
     private final CaesarCipher cipher;
+    private int bestShift = 0;
 
     public int getBestShift() {
         return bestShift;
     }
-
-    private int bestShift = 0;
-
 
     public BruteForce(CaesarCipher cipher) {
         this.cipher = cipher;

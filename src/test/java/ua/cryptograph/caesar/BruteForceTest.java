@@ -8,7 +8,7 @@ class BruteForceTest {
 
     @Test
     void bruteForceFindsCorrectShift() {
-        CaesarCipher cipher = new CaesarCipher();
+        CaesarCipher cipher = new CaesarCipher(new UniversalShifter());
         BruteForce bruteForce = new BruteForce(cipher);
 
         String original = "Lorem Ipsum 1 is simply dummy text of the printing and typesetting industry. " +

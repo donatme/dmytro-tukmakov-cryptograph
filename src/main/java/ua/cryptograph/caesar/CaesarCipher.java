@@ -4,7 +4,11 @@ import ua.cryptograph.alphabets.Alphabet;
 import ua.cryptograph.alphabets.Alphabets;
 
 public class CaesarCipher {
-    private final UniversalShifter universalShifter = new UniversalShifter();
+    private final UniversalShifter universalShifter;
+
+    public CaesarCipher ( UniversalShifter universalShifter){
+        this.universalShifter = universalShifter;
+    }
 
     public String caesarEncrypt(String input, int shift) {
         int alphabetLength = detectAlphabetLength(input);
