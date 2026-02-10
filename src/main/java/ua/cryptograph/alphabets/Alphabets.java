@@ -24,7 +24,7 @@ public final class Alphabets {
                 return alphabet;
             }
         }
-        throw new IllegalArgumentException("Unsupported character:" + ch);
+        return null;
     }
 
     public static int maxLength() {
