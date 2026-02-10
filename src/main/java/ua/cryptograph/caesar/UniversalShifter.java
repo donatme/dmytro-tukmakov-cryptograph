@@ -3,6 +3,8 @@ package ua.cryptograph.caesar;
 import ua.cryptograph.alphabets.Alphabet;
 import ua.cryptograph.alphabets.Alphabets;
 
+import java.util.Optional;
+
 public class UniversalShifter {
 
     public String applyShift(String input, int shift) {
@@ -11,13 +13,12 @@ public class UniversalShifter {
         }
 
         StringBuilder result = new StringBuilder();
-
         for (char ch : input.toCharArray()) {
-            Alphabet alphabet = Alphabets.detect(ch);
-            if (alphabet == null) {
-                result.append(ch);
+            Optional<Alphabet> alphabetOpt = Alphabets.detect(ch);
+            if (alphabetOpt.isPresent()) {
+                result.append(alphabetOpt.get().shift(ch, shift));
             } else {
-                result.append(alphabet.shift(ch, shift));
+                result.append(ch);
             }
         }
         return result.toString();

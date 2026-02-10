@@ -1,6 +1,7 @@
 package ua.cryptograph.alphabets;
 
 import java.util.List;
+import java.util.Optional;
 
 public final class Alphabets {
 
@@ -18,14 +19,15 @@ public final class Alphabets {
     private Alphabets() {
     }
 
-    public static Alphabet detect(char ch) {
+    public static Optional<Alphabet> detect(char ch) {
         for (Alphabet alphabet : ALL) {
             if (alphabet.contains(ch)) {
-                return alphabet;
+                return Optional.of(alphabet);
             }
         }
-        return null;
+        return Optional.empty();
     }
+
 
     public static int maxLength() {
         int max = 0;

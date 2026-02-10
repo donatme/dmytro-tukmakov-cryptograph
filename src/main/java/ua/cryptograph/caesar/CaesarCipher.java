@@ -3,10 +3,12 @@ package ua.cryptograph.caesar;
 import ua.cryptograph.alphabets.Alphabet;
 import ua.cryptograph.alphabets.Alphabets;
 
+import java.util.Optional;
+
 public class CaesarCipher {
     private final UniversalShifter universalShifter;
 
-    public CaesarCipher ( UniversalShifter universalShifter){
+    public CaesarCipher(UniversalShifter universalShifter) {
         this.universalShifter = universalShifter;
     }
 
@@ -24,13 +26,14 @@ public class CaesarCipher {
 
     private int detectAlphabetLength(String input) {
         for (char ch : input.toCharArray()) {
-            Alphabet alphabet = Alphabets.detect(ch);
-            if (alphabet != null) {
-                return alphabet.length();
+            Optional<Alphabet> alphabetOpt = Alphabets.detect(ch);
+            if (alphabetOpt.isPresent()) {
+                return alphabetOpt.get().length();
             }
         }
         return Alphabets.EN.length();
     }
+
 
     private int normalizeShift(int shift, int alphabetLength) {
         return ((shift % alphabetLength) + alphabetLength) % alphabetLength;
